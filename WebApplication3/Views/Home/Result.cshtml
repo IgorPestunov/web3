@@ -1,0 +1,18 @@
+﻿@model WebApplication3.Models.QCreate
+@{
+    ViewData["Title"] = "Result";
+    int sum = 0;
+}
+@if (@Model.Expressions[0].answer == @Model.Expressions[Model.Expressions.Count - 1].Correctanswer) { sum++; }
+<h2>Quiz Results</h2>
+<p>
+    <ol>
+        <li>@Model.Expressions[Model.Expressions.Count - 1].number1 @Model.Expressions[Model.Expressions.Count - 1].oper @Model.Expressions[Model.Expressions.Count - 1].number2 = @Model.Expressions[0].answer</li>
+        @for (int i = 0; i < Model.Expressions.Count - 1; i++)
+        {
+            <li>@Model.Expressions[i].number1 @Model.Expressions[i].oper  @Model.Expressions[i].number2 = @Model.Expressions[i + 1].answer </li>
+            @if (@Model.Expressions[i + 1].answer == @Model.Expressions[i].Correctanswer) { sum++; }
+        }
+    </ol>
+</p>
+<h3>Right Answers @sum out @Model.Expressions.Count</h3>
